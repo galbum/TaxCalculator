@@ -1,18 +1,26 @@
-# Python
-.venv/
-venv/
-__pycache__/
-*.pyc
-.pytest_cache/
-.mypy_cache/
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Env / secrets
 .env
+.env.*
+!.env.example
 
-# OS
+# Editor / OS
 .DS_Store
-
-# Build / dist
-build/
-dist/
-*.egg-info/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
