@@ -1,6 +1,7 @@
 import type { LotResult } from "../tax/types";
 import { lotStatus, recommendedAction } from "../tax/advisor";
 import { formatCurrency, formatDate } from "../tax/format";
+import { APPROACHING_DAYS } from "../config";
 
 const STATUS_LABEL: Record<string, string> = {
   qualified: "Qualified",
@@ -65,7 +66,7 @@ export function PortfolioTable({
       </div>
       <div className="legend">
         <span className="pill pill-qualified">Qualified</span>
-        <span className="pill pill-approaching">Approaching (≤90d)</span>
+        <span className="pill pill-approaching">Approaching (≤{APPROACHING_DAYS}d)</span>
         <span className="pill pill-breach">Breach of Trust risk</span>
       </div>
     </div>

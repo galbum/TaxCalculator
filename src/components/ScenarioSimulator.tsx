@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import { addMonths, evaluateLot } from "../tax/engine";
 import { scenarioSeries } from "../tax/advisor";
 import { formatCurrency, formatDate, formatPercent } from "../tax/format";
+import { SIMULATOR_HORIZON_MONTHS, SIMULATOR_STEPS as STEPS } from "../config";
 import type { EquityLot, UserProfile } from "../tax/types";
 
-const STEPS = 72;
 const W = 720;
 const H = 260;
 const PAD = { l: 64, r: 20, t: 20, b: 36 };
@@ -17,7 +17,10 @@ export function ScenarioSimulator({
   profile: UserProfile;
 }) {
   const from = lot.acquisitionDate;
-  const to = useMemo(() => addMonths(lot.acquisitionDate, 36), [lot.acquisitionDate]);
+  const to = useMemo(
+    () => addMonths(lot.acquisitionDate, SIMULATOR_HORIZON_MONTHS),
+    [lot.acquisitionDate],
+  );
   const qualDate = useMemo(() => addMonths(lot.acquisitionDate, 24), [lot.acquisitionDate]);
 
   const series = useMemo(

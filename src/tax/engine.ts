@@ -86,7 +86,8 @@ function surtaxIncrement(base: number, delta: number, rate: number): number {
   return (over(base + delta) - over(base)) * rate;
 }
 
-function baseIncome(profile: UserProfile): number {
+/** Base annual income the equity stacks on (override wins over the components). */
+export function baseIncome(profile: UserProfile): number {
   if (
     profile.expectedAnnualIncome !== undefined &&
     profile.expectedAnnualIncome !== null &&

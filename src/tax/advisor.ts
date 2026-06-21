@@ -1,5 +1,6 @@
-import { evaluateLot, addMonths, daysBetween, todayIso, utcMs, isoFromMs } from "./engine";
+import { evaluateLot, addMonths, baseIncome, daysBetween, todayIso, utcMs, isoFromMs } from "./engine";
 import { BITUACH_LEUMI_CEILING, SURTAX_THRESHOLD } from "./constants";
+import { APPROACHING_DAYS } from "../config";
 import { formatCurrency, formatDate, formatPercent } from "./format";
 import type { EquityLot, LotResult, UserProfile } from "./types";
 
@@ -67,10 +68,7 @@ export function optimizationInsights(
   profile: UserProfile,
 ): string[] {
   const insights: string[] = [];
-  const base =
-    profile.expectedAnnualIncome && profile.expectedAnnualIncome > 0
-      ? profile.expectedAnnualIncome
-      : (profile.annualSalary || 0) + (profile.expectedBonus || 0) + (profile.otherIncome || 0);
+  const base = baseIncome(profile);
 
   const totalIncomeComponent = results.reduce((s, r) => s + r.current.incomeComponent, 0);
   const totalCapitalGain = results.reduce((s, r) => s + r.current.capitalGainComponent, 0);
@@ -123,7 +121,7 @@ export type LotStatus = "qualified" | "approaching" | "breach";
 
 export function lotStatus(result: LotResult): LotStatus {
   if (result.daysUntilQualified <= 0) return "qualified";
-  if (result.daysUntilQualified <= 90) return "approaching";
+  if (result.daysUntilQualified <= APPROACHING_DAYS) return "approaching";
   return "breach";
 }
 

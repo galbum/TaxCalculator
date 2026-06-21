@@ -9,10 +9,8 @@ import { ScenarioSimulator } from "./components/ScenarioSimulator";
 import { evaluatePortfolio } from "./tax/engine";
 import { optimizationInsights } from "./tax/advisor";
 import { defaultLots, defaultProfile } from "./sampleData";
+import { STORAGE_KEY, THEME_KEY } from "./config";
 import type { EquityLot, UserProfile } from "./tax/types";
-
-const STORAGE_KEY = "ietc.state.v1";
-const THEME_KEY = "ietc.theme";
 
 interface PersistedState {
   lots: EquityLot[];
